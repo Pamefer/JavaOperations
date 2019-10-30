@@ -2,23 +2,27 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Calculation calculation=new Calculation();
-        calculation.execute();
-        System.out.println(calculation.getResult());
-
-        useMathEquationWithoutConstructor();
-        useMathEquation();
-        useInheritance();
+//        useMathEquation();
+//        useInheritance();
 
         String[] data = {
-                "divide 10.0d 34.0d",
-                "add 34.5d 2.4d",
+                "add 2.4d",
+                "substract xx 10.0d",
                 "multiply 23.4d 2.5d",
                 "divide 2.5d 1.1d"
         };
         CalculateHelper calculateHelper = new CalculateHelper();
+
         for(String statement: data){
-            calculateHelper.process(statement);
+            try {
+                calculateHelper.process(statement);
+                System.out.println(calculateHelper );
+            } catch (InvalidStatementException e){
+                System.out.println(e.getMessage());
+                if(e.getCause() != null ){
+                    System.out.println("Original exception"+e.getCause().getMessage());
+                }
+            }
         }
     }
 
@@ -35,18 +39,6 @@ public class Main {
         }
     }
 
-    private static void useMathEquationWithoutConstructor() {
-        Calculation [] data = new Calculation[4];
-        data[0] = create(23d,12d,'a');
-        data[1] = create(22d,15d,'b');
-        data[2] = create(25d,15d,'c');
-        data[3] = create(26d,13d,'d');
-
-        for(Calculation result: data){
-            result.execute();
-            System.out.println("Result"+result.getResult()  );
-        }
-    }
 
     public static Calculation create(double leftVal, double rightVal, char opCode){
         Calculation calc = new Calculation();
