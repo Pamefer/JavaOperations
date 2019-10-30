@@ -4,27 +4,43 @@ public class Main {
 
 //        useMathEquation();
 //        useInheritance();
-
+//        useCalculateHelper();
         String[] data = {
-                "add 2.4d",
-                "substract xx 10.0d",
-                "multiply 23.4d 2.5d",
-                "divide 2.5d 1.1d"
+                "add 2.4d 12d",
+                "power 2.4d 12d",
         };
-        CalculateHelper calculateHelper = new CalculateHelper();
+
+        DynamicHelper helper = new DynamicHelper(new MathProcessing[]{
+                new Adder(),
+                new PowerOf()});
 
         for(String statement: data){
-            try {
-                calculateHelper.process(statement);
-                System.out.println(calculateHelper );
-            } catch (InvalidStatementException e){
-                System.out.println(e.getMessage());
-                if(e.getCause() != null ){
-                    System.out.println("Original exception"+e.getCause().getMessage());
-                }
-            }
+            String output = helper.process(statement);
+            System.out.println(output);
         }
     }
+
+//    private static void useCalculateHelper() {
+//        String[] data = {
+//                "add 2.4d",
+//                "substract xx 10.0d",
+//                "multiply 23.4d 2.5d",
+//                "divide 2.5d 1.1d"
+//        };
+//        CalculateHelper calculateHelper = new CalculateHelper();
+//
+//        for(String statement: data){
+//            try {
+//                calculateHelper.process(statement);
+//                System.out.println(calculateHelper );
+//            } catch (InvalidStatementException e){
+//                System.out.println(e.getMessage());
+//                if(e.getCause() != null ){
+//                    System.out.println("Original exception"+e.getCause().getMessage());
+//                }
+//            }
+//        }
+//    }
 
     private static void useMathEquation() {
         Calculation [] data = new Calculation[4];
